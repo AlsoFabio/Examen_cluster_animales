@@ -1,14 +1,28 @@
 # Examen Cluster Animales
+
+### Instalar las dependencias de Node.js
 Para comenzar, asegúrese de ubicarse en el directorio del repositorio. Abra una terminal y ejecute los siguientes comandos:
 
-Construir la imagen del proyecto ubicado en la carpeta "animales":
+```sh
+cd server
+```
+```sh
+npm i
+```
+```sh
+cd ..
+```
+
+### Construir la imagen del proyecto ubicado en la carpeta "animales":
 
 ```sh
-docker build -t api-animales .\animales\
+docker build -t api-animales ./animales/
 ```
 Con este comando, se crea la imagen del proyecto.
 
 Una vez finalizada la creación de la imagen, ejecute el siguiente comando para desplegar 5 servicios del proyecto:
+
+### Levantar servicio
 
 ```sh
 docker stack deploy -c servicio.yml servicio
