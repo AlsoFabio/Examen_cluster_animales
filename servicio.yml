@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  node:
+      image: api-animales
+      deploy:
+        replicas: 5
+      volumes:
+        - ./animales:/servidor
+      ports:
+        - "8080:8080"

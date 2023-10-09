@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Consulta de Animales</title>
+</head>
+
+<body>
+    <h1>Consulta de Información de Animales</h1>
+    <label for="animalInput">Ingresa el nombre de un animal:</label>
+    <input type="text" id="animalInput" placeholder="Ej. León">
+    <button id="buscarButton">Buscar</button>
+    <p id="resultado"></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const animalInput = document.getElementById("animalInput");
+            const buscarButton = document.getElementById("buscarButton");
+            const resultado = document.getElementById("resultado");
+
+            buscarButton.addEventListener("click", function () {
+                const nombreAnimal = animalInput.value;
+                if (nombreAnimal) {
+                    obtenerInformacionAnimal(nombreAnimal).then((informacion) => {
+                        resultado.textContent = informacion;
+                    });
+                } else {
+                    resultado.textContent = "Por favor, ingresa un nombre de animal.";
+                }
+            });
+
+            async function obtenerInformacionAnimal(nombreAnimal) {
+                try {
+                    const response = await fetch(
+                        `https://es.wikipedia.org/w/api.php?action=query&list=search&srprop=snippet&format=json&origin=*&utf8=&srsearch=${nombreAnimal}`
+                    );
+                    const data = await response.json();
+                    console.log(data.query.search[0].snippet);
+                    const snippet = data.query.search[0].snippet;
+                    // Elimina las etiquetas HTML del snippet
+                    const mensajeSinEtiquetas = snippet.replace(/<[^>]+>/g, '');
+
+                    return mensajeSinEtiquetas;
+                } catch (error) {
+                    console.error("Error al obtener información del animal:", error);
+                    return "No se pudo obtener información del animal.";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
