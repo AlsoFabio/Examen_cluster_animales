@@ -4,7 +4,7 @@
 Para comenzar, asegúrese de ubicarse en el directorio del repositorio. Abra una terminal y ejecute los siguientes comandos:
 
 ```sh
-cd server
+cd animales
 ```
 ```sh
 npm i
